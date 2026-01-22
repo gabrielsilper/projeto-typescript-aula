@@ -38,43 +38,24 @@ class SensorService {
         const sensorBanco = await this.repositorySensor.save(sensorSerializado)
         return sensorBanco;
     }
- /*
+ 
     public async updateSensor(id: string, body: Sensor) {
-
-        const sensores = await this.getAllSensors();
-        const sensorIndex = sensores.findIndex( s => s.id === Number(id));
-
-        if (sensorIndex === -1) {
-            throw new AppError(404, "Sensor não encontrado");
-        }
-
-        const updateSensor = {...sensores[sensorIndex], ...body};
-        sensores[sensorIndex] = updateSensor;
-
-        this.sensorsMemoria = sensores;
-        await write(this.fileName, sensores);
-
-        return updateSensor;
-
+       const sensor = await this.repositorySensor.findOneBy({ id });
+       if(!sensor) {
+            throw new AppError(404, "Sensor não existe!");
+       }
+       const newSensor = await this.repositorySensor.create(body);
+       const updatedSensor = await this.repositorySensor.merge(sensor, newSensor);
+       await this.repositorySensor.save(updatedSensor)
+       return updatedSensor;
     }
 
     public async deleteSensor(id: string) {
 
-        const sensores = await this.getAllSensors();
-        const sensorIndex = sensores.findIndex(s => s.id === Number(id));
-
-        if (sensorIndex === -1) {
-            throw new AppError(404, "Sensor não encontrado");
-        }
-
-        sensores.splice(sensorIndex, 1);
-        this.sensorsMemoria = sensores;
-        await write(this.fileName, sensores);
-
-        return ;
+        
 
     }
-        */
+
 }
 
 export default SensorService;
