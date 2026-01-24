@@ -52,7 +52,17 @@ class SensorService {
 
     public async deleteSensor(id: string) {
 
-        
+        const sensor = await this.repositorySensor.findOneBy({
+            id
+        })
+
+        if(!sensor) {
+            throw  new AppError(404, "Sensor não foi encontrado!");
+        }
+
+        await this.repositorySensor.remove(sensor);
+
+        return
 
     }
 
