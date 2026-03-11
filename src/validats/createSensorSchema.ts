@@ -3,9 +3,7 @@ import { z } from 'zod';
 export const createSensorSchema = z.object({
     serialNumber: z.preprocess(
         (val) => (val === undefined ? "" : val),
-        z.string()
-            .length(8, "O Serial Number deve ter exatamente 8 caracteres")
-            .regex(/^[A-Z0-9]+$/, "Deve conter apenas letras maiúsculas e números")
+        z.string().min(1, "Serial Number é obrigatório")
     ),
 
     fabricante: z.preprocess(

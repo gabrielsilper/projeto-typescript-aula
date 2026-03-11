@@ -8,6 +8,9 @@ services:
       - "6060:6060"
     env_file:
       - .env
+    environment:
+      - DB_HOST=postgres
+      - NODE_ENV=production
     depends_on:
       postgres:
         condition: service_healthy
@@ -17,6 +20,8 @@ services:
     image: postgres:16-alpine
     restart: unless-stopped
     container_name: postgres-db
+    ports:
+      - "5432:5432"
     env_file:
       - .env
     environment:

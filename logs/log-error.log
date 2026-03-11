@@ -867,3 +867,28 @@
 {"level":"error","message":"Cannot read properties of undefined (reading 'trim') - /api/area/sensor/90d3edf4-0d99-4f3d-a3b8-fa089f414fd0 - ::1 "}
 {"level":"error","message":"Cannot read properties of undefined (reading 'trim') - /api/area/sensor/90d3edf4-0d99-4f3d-a3b8-fa089f414fd0 - ::1 "}
 {"level":"error","message":"Cannot read properties of undefined (reading 'trim') - /api/area/sensor/90d3edf4-0d99-4f3d-a3b8-fa089f414fd0 - ::1 "}
+{"level":"error","message":"No metadata for \"Area\" was found. - /api/area - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/login - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/pesquisador - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/pesquisador - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/pesquisador - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/register - ::1 "}
+{"level":"error","message":"No metadata for \"Pesquisador\" was found. - /api/register - ::1 "}
+{"level":"error","message":"E-mail ou Matrícula já cadastrados - /api/register - ::1 "}
+{"level":"error","message":"Credências Inválidas - /api/login - ::1 "}
+{"level":"error","message":"jwt must be provided - /api/refresh - ::1 "}
+{"level":"error","message":"E-mail ou Matrícula já cadastrados - /api/register - ::1 "}
+{"level":"error","message":"Credências Inválidas - /api/login - ::1 "}
