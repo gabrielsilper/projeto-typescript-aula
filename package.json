@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
+    "test:cov": "vitest run --coverage",
     "dev": "nodemon --watch src/**/*.ts --exec tsx src/server.ts",
     "build": "npx tsc"
   },
@@ -37,9 +38,11 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/morgan": "^1.9.10",
     "@types/node": "^25.0.10",
+    "@vitest/coverage-v8": "^4.1.0",
     "nodemon": "^3.1.11",
     "ts-node": "^10.9.2",
     "tsx": "^4.21.0",
-    "typescript": "^5.9.3"
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.0"
   }
 }
