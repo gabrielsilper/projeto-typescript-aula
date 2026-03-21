@@ -16,7 +16,7 @@ const mockAreaRepository = {
   findOne: vi.fn(),
 };
 
-vi.mock("../../src/database/appDataSource.js", () => {
+vi.mock("../../../src/database/appDataSource.js", () => {
   return {
     appDataSource: {
       getRepository: (entity: any) => {
@@ -29,15 +29,15 @@ vi.mock("../../src/database/appDataSource.js", () => {
   };
 });
 
-import SensorService from "../../src/services/SensorService";
+import SensorService from "../../../src/services/SensorService";
 import {
   areaMock,
   sensorCreateDataMock,
   sensorMock,
-} from "../mocks/sensors.mock";
-import { Sensor } from "../../src/entities/Sensor";
-import Area from "../../src/entities/Area";
-import { AppError } from "../../src/errors/AppError";
+} from "../../mocks/sensors.mock";
+import { Sensor } from "../../../src/entities/Sensor";
+import Area from "../../../src/entities/Area";
+import { AppError } from "../../../src/errors/AppError";
 
 describe("SensorService testes", () => {
   const service = new SensorService();
