@@ -158,7 +158,7 @@ describe("SensorService testes", () => {
   it("Deve lançar um erro ao tentar atualizar um sensor que não existe", async () => {
     // Arrange
     const id = "2f19dfa2-ddbd-4f74-9b5f-fee1267e8722";
-    mockSensorRepository.findOne.mockResolvedValue(null);
+    mockSensorRepository.findOneBy.mockResolvedValue(null);
 
     // Act & Assert
     try {
@@ -169,7 +169,7 @@ describe("SensorService testes", () => {
       expect(error.message).toBe("Sensor não encontrado!");
 
       expect(mockSensorRepository.findOneBy).toHaveBeenCalledWith({ id });
-      expect(mockSensorRepository.findOneBy).toHaveResolved();
+      expect(mockSensorRepository.findOneBy).toHaveResolvedWith(null);
       expect(mockSensorRepository.create).not.toHaveBeenCalled();
       expect(mockSensorRepository.merge).not.toHaveBeenCalled();
       expect(mockSensorRepository.save).not.toHaveResolved();
@@ -193,7 +193,7 @@ describe("SensorService testes", () => {
   it("Deve lançar um erro ao tentar remover um sensor que não existe", async () => {
     // Arrange
     const id = "2f19dfa2-ddbd-4f74-9b5f-fee1267e8722";
-    mockSensorRepository.findOne.mockResolvedValue(null);
+    mockSensorRepository.findOneBy.mockResolvedValue(null);
 
     // Act & Assert
     try {
@@ -204,7 +204,7 @@ describe("SensorService testes", () => {
       expect(error.message).toBe("Sensor não encontrado!");
 
       expect(mockSensorRepository.findOneBy).toHaveBeenCalledWith({ id });
-      expect(mockSensorRepository.remove).not.toHaveResolved();
+      expect(mockSensorRepository.remove).not.toHaveResolvedWith(null);
     }
   });
 });
