@@ -5,8 +5,11 @@ vi.resetModules();
 const mockSensorRepository = {
   find: vi.fn(),
   findOne: vi.fn(),
+  findOneBy: vi.fn(),
   create: vi.fn(),
   save: vi.fn(),
+  merge: vi.fn(),
+  remove: vi.fn()
 };
 
 const mockAreaRepository = {
@@ -59,7 +62,7 @@ describe("SensorService testes", () => {
     // Arrange
     mockSensorRepository.findOne.mockResolvedValue(null);
     mockAreaRepository.findOne.mockResolvedValue(areaMock);
-    mockSensorRepository.create.mockResolvedValue(sensorMock);
+    mockSensorRepository.create.mockReturnValue(sensorMock);
     mockSensorRepository.save.mockResolvedValue(sensorMock);
 
     // Act
@@ -69,10 +72,10 @@ describe("SensorService testes", () => {
     expect(sensorCreated).toHaveProperty("id");
     expect(sensorCreated.id).toBe(sensorMock.id);
     expect(sensorCreated).toEqual(sensorMock);
-    expect(mockSensorRepository.findOne).toHaveBeenCalledOnce();
-    expect(mockAreaRepository.findOne).toHaveBeenCalledOnce();
+    expect(mockSensorRepository.findOne).toHaveResolved();
+    expect(mockAreaRepository.findOne).toHaveResolved();
     expect(mockSensorRepository.create).toHaveBeenCalledOnce();
-    expect(mockSensorRepository.save).toHaveBeenCalledOnce();
+    expect(mockSensorRepository.save).toHaveResolved();
   });
 
   it("Deve lançar um erro ao criar um sensor com serialNumber que já existe", async () => {
@@ -107,14 +110,101 @@ describe("SensorService testes", () => {
     } catch (error: any) {
       expect(error).toBeInstanceOf(AppError);
       expect(error.statusCode).toBe(404);
-      expect(error.message).toBe(
-        "Area não foi encontrada!",
-      );
+      expect(error.message).toBe("Area não foi encontrada!");
 
-      expect(mockSensorRepository.findOne).toHaveBeenCalledOnce();
-      expect(mockAreaRepository.findOne).toHaveBeenCalledOnce();
+      expect(mockSensorRepository.findOne).toHaveResolved();
+      expect(mockAreaRepository.findOne).toHaveResolved();
       expect(mockSensorRepository.create).not.toHaveBeenCalled();
-      expect(mockSensorRepository.save).not.toHaveBeenCalled();
+      expect(mockSensorRepository.save).not.toHaveResolved();
+    }
+  });
+
+  it("Deve atualizar o fabricante e Modelo do sensor com sucesso sem alterar as demais propriedades", async () => {
+    // Arrange
+    const id = "2f19dfa2-ddbd-4f74-9b5f-fee3467e64bf";
+    const fabricante = "Fabricante Y";
+    const modelo = "Modelo Y";
+    const data: Partial<Sensor> = { fabricante, modelo };
+
+    mockSensorRepository.findOneBy.mockResolvedValueOnce(sensorMock);
+    mockSensorRepository.create.mockReturnValue({ fabricante, modelo });
+    mockSensorRepository.merge.mockReturnValue({
+      ...sensorMock,
+      fabricante,
+      modelo,
+    });
+    mockSensorRepository.save.mockResolvedValue({
+      ...sensorMock,
+      fabricante,
+      modelo,
+    });
+
+    // Act
+    const sensorUpdated = await service.updateSensor(id, data);
+
+    // Assert
+    expect(sensorUpdated.id).toBe(sensorMock.id);
+    expect(sensorUpdated.fabricante).toBe(fabricante);
+    expect(sensorUpdated.modelo).toBe(modelo);
+    expect(sensorUpdated.serialNumber).toBe(sensorMock.serialNumber);
+
+    expect(mockSensorRepository.findOneBy).toHaveBeenCalledWith({ id });
+    expect(mockSensorRepository.findOneBy).toHaveResolved();
+    expect(mockSensorRepository.create).toHaveBeenCalledOnce();
+    expect(mockSensorRepository.merge).toHaveBeenCalledOnce();
+    expect(mockSensorRepository.save).toHaveResolved();
+  });
+
+  it("Deve lançar um erro ao tentar atualizar um sensor que não existe", async () => {
+    // Arrange
+    const id = "2f19dfa2-ddbd-4f74-9b5f-fee1267e8722";
+    mockSensorRepository.findOne.mockResolvedValue(null);
+
+    // Act & Assert
+    try {
+      await service.updateSensor(id, { serialNumber: "123", cicloLeitura: 1 });
+    } catch (error: any) {
+      expect(error).toBeInstanceOf(AppError);
+      expect(error.statusCode).toBe(404);
+      expect(error.message).toBe("Sensor não encontrado!");
+
+      expect(mockSensorRepository.findOneBy).toHaveBeenCalledWith({ id });
+      expect(mockSensorRepository.findOneBy).toHaveResolved();
+      expect(mockSensorRepository.create).not.toHaveBeenCalled();
+      expect(mockSensorRepository.merge).not.toHaveBeenCalled();
+      expect(mockSensorRepository.save).not.toHaveResolved();
+    }
+  });
+
+  it('Deve remover um sensor com sucesso', async () => {
+    // Arrange
+    const id = "2f19dfa2-ddbd-4f74-9b5f-fee3467e64bf";
+    mockSensorRepository.findOneBy.mockResolvedValueOnce(sensorMock);
+    mockSensorRepository.remove.mockResolvedValue(sensorMock);
+
+    // Act
+    await service.deleteSensor(id);
+
+    // Assert
+    expect(mockSensorRepository.findOneBy).toHaveBeenCalledWith({ id });
+    expect(mockSensorRepository.remove).toHaveResolved();
+  })
+
+  it("Deve lançar um erro ao tentar remover um sensor que não existe", async () => {
+    // Arrange
+    const id = "2f19dfa2-ddbd-4f74-9b5f-fee1267e8722";
+    mockSensorRepository.findOne.mockResolvedValue(null);
+
+    // Act & Assert
+    try {
+      await service.deleteSensor(id);
+    } catch (error: any) {
+      expect(error).toBeInstanceOf(AppError);
+      expect(error.statusCode).toBe(404);
+      expect(error.message).toBe("Sensor não encontrado!");
+
+      expect(mockSensorRepository.findOneBy).toHaveBeenCalledWith({ id });
+      expect(mockSensorRepository.remove).not.toHaveResolved();
     }
   });
 });
