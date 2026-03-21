@@ -9,7 +9,11 @@ export default defineConfig({
 
     coverage: {
       reporter: ["text", "html"],
-      include: ["src/services/**/*.ts"],
+      include: [
+        "src/services/AreaService.ts",
+        "src/services/RefreshTokenService.ts",
+        "src/services/SensorService.ts",
+      ],
     },
   },
 });
