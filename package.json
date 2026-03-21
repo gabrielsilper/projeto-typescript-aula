@@ -4,8 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "vitest",
-    "test:cov": "vitest run --coverage",
+    "test": "vitest run --reporter=verbose",
+    "test:watch": "vitest --reporter=verbose",
+    "test:cov": "vitest run --coverage --reporter=verbose",
     "dev": "nodemon --watch src --ext ts --exec tsx src/server.ts",
     "build": "npx tsc"
   },

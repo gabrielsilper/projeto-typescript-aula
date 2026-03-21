@@ -9,7 +9,7 @@ const mockSensorRepository = {
   create: vi.fn(),
   save: vi.fn(),
   merge: vi.fn(),
-  remove: vi.fn()
+  remove: vi.fn(),
 };
 
 const mockAreaRepository = {
@@ -34,7 +34,7 @@ import {
   areaMock,
   sensorCreateDataMock,
   sensorMock,
-} from "../../mocks/sensors.mock";
+} from "../../mocks/mocks";
 import { Sensor } from "../../../src/entities/Sensor";
 import Area from "../../../src/entities/Area";
 import { AppError } from "../../../src/errors/AppError";
@@ -176,7 +176,7 @@ describe("SensorService testes", () => {
     }
   });
 
-  it('Deve remover um sensor com sucesso', async () => {
+  it("Deve remover um sensor com sucesso", async () => {
     // Arrange
     const id = "2f19dfa2-ddbd-4f74-9b5f-fee3467e64bf";
     mockSensorRepository.findOneBy.mockResolvedValueOnce(sensorMock);
@@ -188,7 +188,7 @@ describe("SensorService testes", () => {
     // Assert
     expect(mockSensorRepository.findOneBy).toHaveBeenCalledWith({ id });
     expect(mockSensorRepository.remove).toHaveResolved();
-  })
+  });
 
   it("Deve lançar um erro ao tentar remover um sensor que não existe", async () => {
     // Arrange
