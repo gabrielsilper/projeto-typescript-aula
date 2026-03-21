@@ -69,6 +69,10 @@ describe("SensorService testes", () => {
     expect(sensorCreated).toHaveProperty("id");
     expect(sensorCreated.id).toBe(sensorMock.id);
     expect(sensorCreated).toEqual(sensorMock);
+    expect(mockSensorRepository.findOne).toHaveBeenCalledOnce();
+    expect(mockAreaRepository.findOne).toHaveBeenCalledOnce();
+    expect(mockSensorRepository.create).toHaveBeenCalledOnce();
+    expect(mockSensorRepository.save).toHaveBeenCalledOnce();
   });
 
   it("Deve lançar um erro ao criar um sensor com serialNumber que já existe", async () => {
@@ -85,8 +89,30 @@ describe("SensorService testes", () => {
         "Sensor com este Serial Number já cadastrado!",
       );
 
-      expect(mockSensorRepository.findOne).toHaveBeenCalled();
+      expect(mockSensorRepository.findOne).toHaveBeenCalledOnce();
       expect(mockAreaRepository.findOne).not.toHaveBeenCalled();
+      expect(mockSensorRepository.create).not.toHaveBeenCalled();
+      expect(mockSensorRepository.save).not.toHaveBeenCalled();
+    }
+  });
+
+  it("Deve lançar um erro ao criar um sensor com uma área que não foi cadastrada", async () => {
+    // Arrange
+    mockSensorRepository.findOne.mockResolvedValue(null);
+    mockAreaRepository.findOne.mockResolvedValue(null);
+
+    // Act & Assert
+    try {
+      await service.addSensor({ serialNumber: "123", area_id: 1 });
+    } catch (error: any) {
+      expect(error).toBeInstanceOf(AppError);
+      expect(error.statusCode).toBe(404);
+      expect(error.message).toBe(
+        "Area não foi encontrada!",
+      );
+
+      expect(mockSensorRepository.findOne).toHaveBeenCalledOnce();
+      expect(mockAreaRepository.findOne).toHaveBeenCalledOnce();
       expect(mockSensorRepository.create).not.toHaveBeenCalled();
       expect(mockSensorRepository.save).not.toHaveBeenCalled();
     }
