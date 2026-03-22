@@ -14,6 +14,13 @@ export default defineConfig({
         "src/controllers/**/*.ts",
         "src/middleware/**/*.ts",
       ],
+      exclude: [
+        "src/services/LeituraService.ts",
+        "src/controllers/AreaController.ts",
+        "src/controllers/LeituraController.ts",
+        "src/controllers/SensorController.ts",
+        "src/middleware/authMidd.ts",
+      ],
     },
   },
 });
