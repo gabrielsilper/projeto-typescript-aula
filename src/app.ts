@@ -10,6 +10,7 @@ import compression from "compression";
 
 import errorHandler from "./middleware/errorHandler.js";
 import indexRouter from "./routes/index.routes.js";
+import { validarBody } from "./middleware/validarBody.js";
 
 dotenv.config();
 
@@ -48,6 +49,10 @@ app.use('/api', indexRouter);
 app.get('/api/health', (req, res) => {
     res.status(200).json({ status: 'ok' });
 })
+
+app.post("/api/test-error", validarBody({}), (req, res) => {
+  throw new Error("Erro forçado");
+});
 
 app.use(errorHandler)
 
