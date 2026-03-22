@@ -9,7 +9,7 @@ export const testDataSource = new DataSource({
   type: "sqlite",
   database: ":memory:",
   dropSchema: true,
-  entities: [Pesquisador],
+  entities: [Pesquisador, RefreshToken],
   synchronize: true,
   logging: false,
 });

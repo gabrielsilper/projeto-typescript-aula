@@ -40,7 +40,7 @@ describe("Testes de integração para contexto total das rotas de Pesquisador", 
 
     it("Deve enviar uma requisição POST para /api/pesquisador com um email que já cadastrado, retornar um body de error e com código 400", async () => {
       const repository = appDataSource.getRepository(Pesquisador);
-      const pesquisador = await repository.save(bodyPesquisadorMock);
+      await repository.save(bodyPesquisadorMock);
 
       const response = await request(app)
         .post("/api/pesquisador")

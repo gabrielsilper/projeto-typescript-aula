@@ -48,7 +48,7 @@ export const bodyPesquisadorMock = {
   matricula: "MAT001",
   especialidade: "Biologia",
   titulacao: "Mestrado",
-  dataNascimento: "1995-05-20",
+  dataNascimento: new Date("1995-05-20"),
 };
 
 export const bodyAdminMock = {
@@ -58,7 +58,22 @@ export const bodyAdminMock = {
   matricula: "MAT002",
   especialidade: "Química",
   titulacao: "PhD",
-  dataNascimento: "1983-03-21",
+  dataNascimento: new Date("1983-03-21"),
+};
+
+export const bodyLoginAdminMock = {
+  email: "admin@email.com",
+  senha: "minimo8chars@",
+};
+
+export const failEmailBodyLoginMock = {
+  email: "admin123@email.com",
+  senha: "minimo8chars@",
+};
+
+export const failSenhaBodyLoginMock = {
+  email: "admin@email.com",
+  senha: "minimo867chars@",
 };
 
 export const failBodyPesquisadorMock = {
@@ -68,5 +83,5 @@ export const failBodyPesquisadorMock = {
   matricula: 100,
   especialidade: "Biologia",
   titulacao: "Mestrado",
-  dataNascimento: "1995-05-20",
+  dataNascimento: new Date("1995-05-20"),
 };
