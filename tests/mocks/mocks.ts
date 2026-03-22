@@ -42,10 +42,30 @@ export const sensorCreateDataMock = {
 };
 
 export const bodyPesquisadorMock = {
+  nome: "professor",
+  email: "professor@email.com",
+  senha: "minimo8chars#",
+  matricula: "MAT001",
+  especialidade: "Biologia",
+  titulacao: "Mestrado",
+  dataNascimento: "1995-05-20",
+};
+
+export const bodyAdminMock = {
   nome: "admin",
   email: "admin@email.com",
+  senha: "minimo8chars@",
+  matricula: "MAT002",
+  especialidade: "Química",
+  titulacao: "PhD",
+  dataNascimento: "1983-03-21",
+};
+
+export const failBodyPesquisadorMock = {
+  nome: "",
+  email: "adminemail.com",
   senha: "minimo8chars",
-  matricula: "MAT001",
+  matricula: 100,
   especialidade: "Biologia",
   titulacao: "Mestrado",
   dataNascimento: "1995-05-20",
