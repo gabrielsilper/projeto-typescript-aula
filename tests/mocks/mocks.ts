@@ -40,3 +40,13 @@ export const sensorCreateDataMock = {
   area: areaMock,
   leituras: [],
 };
+
+export const bodyPesquisadorMock = {
+  nome: "admin",
+  email: "admin@email.com",
+  senha: "minimo8chars",
+  matricula: "MAT001",
+  especialidade: "Biologia",
+  titulacao: "Mestrado",
+  dataNascimento: "1995-05-20",
+};
